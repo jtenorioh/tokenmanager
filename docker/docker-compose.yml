@@ -9,8 +9,13 @@ services:
       - "7776:7776"
     environment:
       - ENV=production
+    volumes:
+      - ./data:/app/data
+      - ~/.openclaw:/root/.openclaw:ro
     depends_on:
       - frontend
+    networks:
+      - tokenmanager
 
   frontend:
     build:
@@ -18,3 +23,11 @@ services:
       dockerfile: ../docker/Dockerfile.frontend
     ports:
       - "7777:7777"
+    depends_on:
+      - backend
+    networks:
+      - tokenmanager
+
+networks:
+  tokenmanager:
+    driver: bridge
