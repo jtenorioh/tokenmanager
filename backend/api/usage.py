@@ -25,9 +25,9 @@ async def get_total_tokens():
     """
     # Import clients here to avoid import issues
     try:
-        from .elevenlabs_client import ElevenLabsClient
-        from .brave_client import BraveClient
-        from .openclaw_client import OpenClawClient
+        from services.elevenlabs_client import ElevenLabsClient
+        from services.brave_client import BraveClient
+        from services.openclaw_client import OpenClawClient
         
         elevenlabs = ElevenLabsClient()
         brave = BraveClient()
@@ -78,8 +78,8 @@ async def get_total_tokens():
 async def get_usage_by_provider():
     """Get usage breakdown by service provider."""
     try:
-        from .elevenlabs_client import ElevenLabsClient
-        from .brave_client import BraveClient
+        from services.elevenlabs_client import ElevenLabsClient
+        from services.brave_client import BraveClient
         
         elevenlabs = ElevenLabsClient()
         brave = BraveClient()
@@ -96,7 +96,7 @@ async def get_usage_by_provider():
 async def get_primary_model_usage():
     """Get primary model (Qwen3.5) usage statistics."""
     try:
-        from .openclaw_client import OpenClawClient
+        from services.openclaw_client import OpenClawClient
         
         openclaw = OpenClawClient()
         
@@ -113,7 +113,7 @@ async def get_primary_model_usage():
 async def get_vision_model_usage():
     """Get vision model usage statistics."""
     try:
-        from .openclaw_client import OpenClawClient
+        from services.openclaw_client import OpenClawClient
         
         openclaw = OpenClawClient()
         
@@ -130,8 +130,8 @@ async def get_vision_model_usage():
 async def get_api_consumption():
     """Get overall API consumption statistics."""
     try:
-        from .elevenlabs_client import ElevenLabsClient
-        from .brave_client import BraveClient
+        from services.elevenlabs_client import ElevenLabsClient
+        from services.brave_client import BraveClient
         
         elevenlabs = ElevenLabsClient()
         brave = BraveClient()

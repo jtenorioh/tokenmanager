@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Import API routers
 from api.usage import router as usage_router
+from api.history import router as history_router
 
 app = fastapi.FastAPI(title="Token Manager API")
 
@@ -25,3 +26,4 @@ async def health():
 
 # Include API routes
 app.include_router(usage_router)
+app.include_router(history_router)

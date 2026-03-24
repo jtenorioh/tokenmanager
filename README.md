@@ -54,12 +54,41 @@ npm run dev
 | `/api/usage/by-provider` | GET | Breakdown by ElevenLabs, Brave |
 | `/api/models/primary` | GET | Primary model usage stats |
 | `/api/models/vision` | GET | Vision model usage stats |
+| `/api/api-consumption` | GET | API call counts and status |
+| `/api/history` | GET | Get usage history with date filtering |
+| `/api/history` | POST | Log new usage entry |
+| `/api/history/aggregate` | GET | Aggregated usage statistics |
+
+### Input Validation
+
+All POST endpoints validate input:
+- Required fields must be present
+- Numeric values are validated
+- Dates must be in ISO format (YYYY-MM-DD)
+- Invalid requests return 422 status with error details
+
+### Query Parameters
+
+- `start` - Start date filter (ISO format)
+- `end` - End date filter (ISO format)
+- `provider` - Filter by provider name
+- `limit` - Max records (default 100, max 1000)
 
 ## Configuration
 
 API keys are loaded from:
 - `~/.openclaw/openclaw.json` (preferred)
 - `~/.openclaw/workspace/.credentials/elevenlabs.json`
+
+### Data Persistence
+
+Usage history is stored in SQLite at:
+- `backend/data/usage_history.db`
+
+The database is auto-created on first run and includes:
+- Timestamped usage records
+- Provider and metric type tracking
+- Indexed queries for performance
 
 ## License
 

@@ -4,6 +4,7 @@ Brave Search API Client
 
 Fetches API usage statistics.
 """
+from datetime import datetime
 
 import requests
 from pathlib import Path
