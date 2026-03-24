@@ -1,6 +1,9 @@
 import fastapi
 from fastapi.middleware.cors import CORSMiddleware
 
+# Import API routers
+from api.usage import router as usage_router
+
 app = fastapi.FastAPI(title="Token Manager API")
 
 # CORS middleware for React frontend
@@ -19,3 +22,6 @@ async def root():
 @app.get("/health")
 async def health():
     return {"status": "healthy"}
+
+# Include API routes
+app.include_router(usage_router)

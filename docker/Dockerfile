@@ -2,8 +2,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install dependencies directly (no pip needed)
-RUN pip install fastapi uvicorn python-dotenv requests aiofiles
+RUN pip install --no-cache-dir fastapi uvicorn python-dotenv requests aiofiles
 
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
