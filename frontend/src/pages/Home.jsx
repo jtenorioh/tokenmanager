@@ -30,7 +30,6 @@ const API_BASE = 'http://localhost:7776';
 function Home() {
   const [loading, setLoading] = useState(true);
   const [usage, setUsage] = useState(null);
-  const [byProvider, setByProvider] = useState(null);
   const [history, setHistory] = useState([]);
   const [timeRange, setTimeRange] = useState('week');
 
@@ -52,7 +51,6 @@ function Home() {
       const historyData = await historyRes.json();
 
       setUsage(usageData);
-      setByProvider(providerData);
       setHistory(historyData.history || []);
     } catch (err) {
       console.error('Failed to load data:', err);
