@@ -6,7 +6,7 @@ Provides REST endpoints for usage history.
 """
 
 from fastapi import APIRouter, HTTPException, Query
-from typing import Optional, List
+from typing import Optional, List, Annotated
 from pydantic import BaseModel, field_validator
 import re
 
@@ -58,10 +58,10 @@ async def create_history_entry(entry: UsageLogRequest):
 
 @router.get("/history")
 async def get_history(
-    start: Optional[str] = Query(None, description="Start date (ISO format)"),
-    end: Optional[str] = Query(None, description="End date (ISO format)"),
-    provider: Optional[str] = Query(None, description="Filter by provider"),
-    limit: int = Query(100, ge=1, le=1000)
+    start: Annotated[Optional[str], Query(None, description="Start date (ISO format)")] = None,
+    end: Annotated[Optional[str], Query(None, description="End date (ISO format)")] = None,
+    provider: Annotated[Optional[str], Query(None, description="Filter by provider")] = None,
+    limit: Annotated[int, Query(100, ge=1, le=1000)] = 100
 ):
     """
     Get usage history with optional date filtering.
@@ -81,8 +81,8 @@ async def get_history(
 
 @router.get("/history/aggregate")
 async def get_history_aggregate(
-    start: Optional[str] = Query(None),
-    end: Optional[str] = Query(None)
+    start: Annotated[Optional[str], Query(None)] = None,
+    end: Annotated[Optional[str], Query(None)] = None
 ):
     """Get aggregated usage statistics."""
     try:
