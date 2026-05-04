@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.env
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# SonarQube
+.scannerwork/
+.sonarqube/
+
+# Database
+*.db
+data/
+
+# OS
+.DS_Store
+Thumbs.db
