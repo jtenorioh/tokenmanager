@@ -71,7 +71,7 @@ async def get_total_tokens():
         }
         
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching token usage")
 
 
 @router.get("/usage/by-provider")
@@ -89,7 +89,7 @@ async def get_usage_by_provider():
             "brave": brave.get_usage()
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching provider usage")
 
 
 @router.get("/models/primary")
@@ -106,7 +106,7 @@ async def get_primary_model_usage():
             "session_history": openclaw.get_session_usage()
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching primary model usage")
 
 
 @router.get("/models/vision")
@@ -123,7 +123,7 @@ async def get_vision_model_usage():
             "session_history": openclaw.get_session_usage()
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching vision model usage")
 
 
 @router.get("/api-consumption")
@@ -148,4 +148,4 @@ async def get_api_consumption():
             }
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching API consumption stats")

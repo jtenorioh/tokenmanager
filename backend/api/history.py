@@ -53,7 +53,7 @@ async def create_history_entry(entry: UsageLogRequest):
         )
         return {"id": row_id, "status": "logged"}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while logging usage entry")
 
 
 @router.get("/history")
@@ -76,7 +76,7 @@ async def get_history(
         history = db.get_history(start=start, end=end, provider=provider, limit=limit)
         return {"history": history, "count": len(history)}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while logging usage entry")
 
 
 @router.get("/history/aggregate")
@@ -89,4 +89,4 @@ async def get_history_aggregate(
         aggregate = db.get_usage_aggregate(start=start, end=end)
         return {"aggregate": aggregate}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e), description="Internal server error while logging usage entry")

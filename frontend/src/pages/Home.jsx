@@ -47,7 +47,6 @@ function Home() {
       ]);
 
       const usageData = await usageRes.json();
-      const providerData = await providerRes.json();
       const historyData = await historyRes.json();
 
       setUsage(usageData);
@@ -203,8 +202,8 @@ function Home() {
               {history.length === 0 ? (
                 <tr><td colSpan="4" style={{ padding: '20px', textAlign: 'center' }}>No history data</td></tr>
               ) : (
-                history.slice(0, 10).map((entry, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
+                history.slice(0, 10).map((entry) => (
+                  <tr key={entry.timestamp + entry.provider} style={{ borderBottom: '1px solid #eee' }}>
                     <td style={{ padding: '10px' }}>{new Date(entry.timestamp).toLocaleString()}</td>
                     <td style={{ padding: '10px' }}>{entry.provider}</td>
                     <td style={{ padding: '10px' }}>{entry.metric_type}</td>
