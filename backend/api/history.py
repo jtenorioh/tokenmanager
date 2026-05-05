@@ -33,7 +33,7 @@ class UsageLogRequest(BaseModel):
         return v
 
 
-@router.post("/history")
+@router.post("/history", responses={500: {"description": "Internal server error"}})
 async def create_history_entry(entry: UsageLogRequest):
     """
     Log a new usage entry.
@@ -56,7 +56,7 @@ async def create_history_entry(entry: UsageLogRequest):
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while logging usage entry")
 
 
-@router.get("/history")
+@router.get("/history", responses={500: {"description": "Internal server error"}})
 async def get_history(
     start: Annotated[Optional[str], Query(None, description="Start date (ISO format)")] = None,
     end: Annotated[Optional[str], Query(None, description="End date (ISO format)")] = None,
@@ -79,7 +79,7 @@ async def get_history(
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while logging usage entry")
 
 
-@router.get("/history/aggregate")
+@router.get("/history/aggregate", responses={500: {"description": "Internal server error"}})
 async def get_history_aggregate(
     start: Annotated[Optional[str], Query(None)] = None,
     end: Annotated[Optional[str], Query(None)] = None

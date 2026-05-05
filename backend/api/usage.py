@@ -16,7 +16,7 @@ async def health_check():
     return {"status": "healthy"}
 
 
-@router.get("/usage/tokens")
+@router.get("/usage/tokens", responses={500: {"description": "Internal server error"}})
 async def get_total_tokens():
     """
     Get total tokens used across all services.
@@ -74,7 +74,7 @@ async def get_total_tokens():
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching token usage")
 
 
-@router.get("/usage/by-provider")
+@router.get("/usage/by-provider", responses={500: {"description": "Internal server error"}})
 async def get_usage_by_provider():
     """Get usage breakdown by service provider."""
     try:
@@ -92,7 +92,7 @@ async def get_usage_by_provider():
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching provider usage")
 
 
-@router.get("/models/primary")
+@router.get("/models/primary", responses={500: {"description": "Internal server error"}})
 async def get_primary_model_usage():
     """Get primary model (Qwen3.5) usage statistics."""
     try:
@@ -109,7 +109,7 @@ async def get_primary_model_usage():
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching primary model usage")
 
 
-@router.get("/models/vision")
+@router.get("/models/vision", responses={500: {"description": "Internal server error"}})
 async def get_vision_model_usage():
     """Get vision model usage statistics."""
     try:
@@ -126,7 +126,7 @@ async def get_vision_model_usage():
         raise HTTPException(status_code=500, detail=str(e), description="Internal server error while fetching vision model usage")
 
 
-@router.get("/api-consumption")
+@router.get("/api-consumption", responses={500: {"description": "Internal server error"}})
 async def get_api_consumption():
     """Get overall API consumption statistics."""
     try:
