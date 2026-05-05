@@ -11,21 +11,24 @@ from pathlib import Path
 import json
 
 
+OPENCLAW_DIR = ".openclaw"
+
+
 class BraveClient:
     def __init__(self):
         self.api_url = "https://api.search.brave.com"
-        
+
     def get_api_key(self):
         """Load Brave API key from OpenClaw config."""
         # Try OpenClaw config first
-        config_file = Path.home() / ".openclaw" / "openclaw.json"
+        config_file = Path.home() / OPENCLAW_DIR / "openclaw.json"
         if config_file.exists():
             with open(config_file) as f:
                 config = json.load(f)
                 return config.get("web_search", {}).get("brave_api_key")
         
         # Try credentials file
-        creds_file = Path.home() / ".openclaw" / "workspace" / ".credentials" / "brave-api-key"
+        creds_file = Path.home() / OPENCLAW_DIR / "workspace" / ".credentials" / "brave-api-key"
         if creds_file.exists():
             with open(creds_file) as f:
                 return f.read().strip()
@@ -60,7 +63,7 @@ class BraveClient:
         """
         try:
             # Check recent OpenClaw sessions for API calls
-            workspace = Path.home() / ".openclaw" / "workspace"
+            workspace = Path.home() / OPENCLAW_DIR / "workspace"
             
             # Look for session files that might contain Brave API usage
             daily_logs = workspace / "memory"

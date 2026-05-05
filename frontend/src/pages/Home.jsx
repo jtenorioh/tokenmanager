@@ -30,7 +30,6 @@ const API_BASE = 'http://localhost:7776';
 function Home() {
   const [loading, setLoading] = useState(true);
   const [usage, setUsage] = useState(null);
-  const [byProvider, setByProvider] = useState(null);
   const [history, setHistory] = useState([]);
   const [timeRange, setTimeRange] = useState('week');
 
@@ -48,11 +47,9 @@ function Home() {
       ]);
 
       const usageData = await usageRes.json();
-      const providerData = await providerRes.json();
       const historyData = await historyRes.json();
 
       setUsage(usageData);
-      setByProvider(providerData);
       setHistory(historyData.history || []);
     } catch (err) {
       console.error('Failed to load data:', err);
@@ -205,8 +202,8 @@ function Home() {
               {history.length === 0 ? (
                 <tr><td colSpan="4" style={{ padding: '20px', textAlign: 'center' }}>No history data</td></tr>
               ) : (
-                history.slice(0, 10).map((entry, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #eee' }}>
+                history.slice(0, 10).map((entry) => (
+                  <tr key={entry.timestamp + entry.provider} style={{ borderBottom: '1px solid #eee' }}>
                     <td style={{ padding: '10px' }}>{new Date(entry.timestamp).toLocaleString()}</td>
                     <td style={{ padding: '10px' }}>{entry.provider}</td>
                     <td style={{ padding: '10px' }}>{entry.metric_type}</td>

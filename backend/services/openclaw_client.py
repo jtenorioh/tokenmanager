@@ -15,7 +15,7 @@ class OpenClawClient:
         self.workspace_path = Path.home() / ".openclaw" / "workspace"
         self.credentials_file = self.workspace_path / ".credentials" / "microsoft-graph-tokens.json"
         
-    def get_model_usage(self, days=7):
+    def get_model_usage(self):
         """
         Get model usage statistics from OpenClaw session history.
         
@@ -39,7 +39,7 @@ class OpenClawClient:
         
         return usage
     
-    def get_session_usage(self, session_key=None):
+    def get_session_usage(self):
         """Get specific session usage details."""
         # Read session files from workspace if available
         sessions_dir = self.workspace_path / "sessions"
